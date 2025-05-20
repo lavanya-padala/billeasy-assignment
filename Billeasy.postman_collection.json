@@ -1,0 +1,290 @@
+{
+	"info": {
+		"_postman_id": "242871b1-47c1-465c-9e18-5e43f41353bb",
+		"name": "Billeasy",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "37279400"
+	},
+	"item": [
+		{
+			"name": "Main Route",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"description": "Main / route only for testing"
+			},
+			"response": []
+		},
+		{
+			"name": "SignUp",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\":\"lavanya\",\r\n    \"email\":\"lavanyapadala666@gmail.com\",\r\n    \"password\":\"123@Abcde\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/signup",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"signup"
+					]
+				},
+				"description": "This endpoint allows users to sign up by sending a POST request to the specified URL. The request should include the user's username, email, and password in the raw request body.\n\n### Request Body\n\n- `username` (string): The username of the user.\n    \n- `email` (string): The email address of the user.\n    \n- `password` (string): The password for the user account.Password should be 8 characters long and it should contain one upeercase and one lowercase letter.\n    \n\n### Response\n\nUpon successful execution, the server will respond with a status code of 201 and a JSON object with a \"message\" key. The value of the \"message\" key will indicate the success of the signup process.\n\nIf user already exists or internal server, the server will respond with a status code of 500 and a JSON object with a \"error\" key will indictate the reason for error."
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\":\"lavanyapadala666@gmail.com\",\r\n    \"password\":\"123@Abcde\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"login"
+					]
+				},
+				"description": "This endpoint allows users to log in by providing their email and password in the request body.\n\n### Request Body\n\n- `email` (string, required): The email address of the user.\n    \n- `password` (string, required): The password of the user.\n    \n\n### Response\n\nIf user exists and password is correct, server will respond with a status code of 200 and a JSON object with a \"message\" key and token for authorization. The value of the \"message\" key will indicate the success of the login process."
+			},
+			"response": []
+		},
+		{
+			"name": "Add Book",
+			"request": {
+				"auth": {
+					"type": "jwt",
+					"jwt": [
+						{
+							"key": "algorithm",
+							"value": "HS256",
+							"type": "string"
+						},
+						{
+							"key": "isSecretBase64Encoded",
+							"value": false,
+							"type": "boolean"
+						},
+						{
+							"key": "payload",
+							"value": "{}",
+							"type": "string"
+						},
+						{
+							"key": "addTokenTo",
+							"value": "header",
+							"type": "string"
+						},
+						{
+							"key": "headerPrefix",
+							"value": "Bearer",
+							"type": "string"
+						},
+						{
+							"key": "queryParamKey",
+							"value": "token",
+							"type": "string"
+						},
+						{
+							"key": "header",
+							"value": "{}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4MmMxZmU0ZDM2YWUwYWY4MTU3M2NjNCIsImlhdCI6MTc0Nzc0Nzg5MywiZXhwIjoxNzQ3ODM0MjkzfQ.6oJdToqZvFIlRn_e-k-LsOR502Q0m0J_w3P0FcahCcc",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\":\"Three thousand stitches\",\r\n    \"genre\":\"Fiction\",\r\n    \"author\":\"Sudha Murthy\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/books",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"books"
+					]
+				},
+				"description": "The endpoint allows the creation of a new book with the provided details. The request should include the title, genre, and author of the book.\n\n### Request Body\n\n- title (string, required): The title of the book.\n    \n- genre (string, required): The genre of the book.\n    \n- author (string, required): The author of the book."
+			},
+			"response": []
+		},
+		{
+			"name": "Get all books",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/books",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"books"
+					]
+				},
+				"description": "The endpoint retrieves a list of books."
+			},
+			"response": []
+		},
+		{
+			"name": "Submit review",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4MmMxZmU0ZDM2YWUwYWY4MTU3M2NjNCIsImlhdCI6MTc0Nzc0Nzg5MywiZXhwIjoxNzQ3ODM0MjkzfQ.6oJdToqZvFIlRn_e-k-LsOR502Q0m0J_w3P0FcahCcc",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"rating\":\"5\",\r\n    \"comment\":\"My favourite book\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/books/682c85de3ccd06d87f273afe/reviews",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"books",
+						"682c85de3ccd06d87f273afe",
+						"reviews"
+					]
+				},
+				"description": "The endpoint allows users to submit reviews for a specific book. The request body should include the \"rating\" and \"comment\" parameters to provide the review details.\n\n### Request Body\n\n- **rating** (number): The rating given for the book.Value between 1 and 5.\n    \n- **comment** (string): The comment or review for the book.\n    \n\n### Response\n\nSuccess message on succesfull submission of review. If user tries to submit another review for same book again it will send an error message with status code 500."
+			},
+			"response": []
+		},
+		{
+			"name": "Edit review",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4MmMxZmU0ZDM2YWUwYWY4MTU3M2NjNCIsImlhdCI6MTc0Nzc0Nzg5MywiZXhwIjoxNzQ3ODM0MjkzfQ.6oJdToqZvFIlRn_e-k-LsOR502Q0m0J_w3P0FcahCcc",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"rating\":\"4.5\",\r\n    \"comment\":\"Excellent book\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/reviews/682c85de3ccd06d87f273afe",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"reviews",
+						"682c85de3ccd06d87f273afe"
+					]
+				},
+				"description": "This request is used to update a specific review identified by the book id \"682c85de3ccd06d87f273afe\" at the endpoint [http://localhost:5000/reviews/:id](http://localhost:5000/reviews/682c85de3ccd06d87f273afe). The request payload should be in raw JSON format and include the \"rating\" and \"comment\" fields to update the review.\n\n### Response\n\nOn succesfull updation sends a json with \"message\" key and if user review doesn't exist for a book it sends a json with key \"error\"."
+			},
+			"response": []
+		},
+		{
+			"name": "Delete review",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4MmMxZmU0ZDM2YWUwYWY4MTU3M2NjNCIsImlhdCI6MTc0Nzc0Nzg5MywiZXhwIjoxNzQ3ODM0MjkzfQ.6oJdToqZvFIlRn_e-k-LsOR502Q0m0J_w3P0FcahCcc",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:5000/reviews/682c85de3ccd06d87f273afe",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"reviews",
+						"682c85de3ccd06d87f273afe"
+					]
+				},
+				"description": "### DELETE /reviews/{bookId}\n\nThis endpoint is used to delete a specific review identified by the bookId and userId\n\n#### Request\n\nNo request body is required for this endpoint.\n\n- bookId (path parameter) - The unique identifier of the book of the review to be deleted.\n    \n\n#### Response\n\nThe response for this request is in JSON format and includes the following schema:\n\nThe response will contain a `200` status code along with a `message` indicating the status of the deletion operation.\n\nIf the review doesn't existing with given bookId and userId then it will return a json with error indicating the issue."
+			},
+			"response": []
+		},
+		{
+			"name": "Search book",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"description": "This endpoint makes an HTTP GET request to search for items based on the provided body parameter.\n\n### Request\n\n- Method: GET\n    \n- Endpoint: [http://localhost:5000/search](http://localhost:5000/search)\n    \n- Body Parameters:\n    \n    - query (string): The search query.\n        \n\n### Response\n\nThe response is in the form of a JSON array with the following schema:\n\n``` json\n[\n    {\n        \"_id\": \"string\",\n        \"title\": \"string\",\n        \"author\": \"string\",\n        \"genre\": \"string\",\n        \"reviews\": [\n            {\n                \"user\": \"string\",\n                \"rating\": 0,\n                \"comment\": \"string\",\n                \"_id\": \"string\",\n                \"createdAt\": \"string\",\n                \"updatedAt\": \"string\"\n            }\n        ],\n        \"createdAt\": \"string\",\n        \"updatedAt\": \"string\",\n        \"__v\": 0\n    }\n]\n\n ```"
+			},
+			"response": []
+		},
+		{
+			"name": "Get book by id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"description": "The endpoint retrieves detailed information about a specific book based on the provided book ID. The response contains a JSON object with the details of the book, including its title, author, genre, creation and update timestamps, along with an array of reviews. Each review includes the user's ID and username, rating, comment, and timestamps. Additionally, the response includes metadata such as total number of reviews, current page, total pages, and average rating.\n\n``` json\n{\n  \"type\": \"object\",\n  \"properties\": {\n    \"book\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"_id\": { \"type\": \"string\" },\n        \"title\": { \"type\": \"string\" },\n        \"author\": { \"type\": \"string\" },\n        \"genre\": { \"type\": \"string\" },\n        \"createdAt\": { \"type\": \"string\" },\n        \"updatedAt\": { \"type\": \"string\" }\n      }\n    },\n    \"reviews\": {\n      \"type\": \"array\",\n      \"items\": {\n        \"type\": \"object\",\n        \"properties\": {\n          \"user\": {\n            \"type\": \"object\",\n            \"properties\": {\n              \"_id\": { \"type\": \"string\" },\n              \"username\": { \"type\": \"string\" }\n            }\n          },\n          \"rating\": { \"type\": \"number\" },\n          \"comment\": { \"type\": \"string\" },\n          \"_id\": { \"type\": \"string\" },\n          \"createdAt\": { \"type\": \"string\" },\n          \"updatedAt\": { \"type\": \"string\" }\n        }\n      }\n    },\n    \"totalReviews\": { \"type\": \"number\" },\n    \"currentPage\": { \"type\": \"number\" },\n    \"totalPages\": { \"type\": \"number\" },\n    \"averageRating\": { \"type\": \"number\" }\n  }\n}\n\n ```"
+			},
+			"response": []
+		}
+	]
+}
